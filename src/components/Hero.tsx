@@ -12,6 +12,9 @@ export function Hero() {
   const [typedText, setTypedText] = useState('');
   const [showEmojis, setShowEmojis] = useState(false);
   const [dontClickCount, setDontClickCount] = useState(0);
+  const { addRageClick } = useAchievements();
+  const { toast } = useToast();
+  const { playSound } = useSound();
 
   const texts = {
     light: "Hi! I'm a developer who debugs with coffee ☕",
@@ -39,16 +42,16 @@ export function Hero() {
 
   const handleDontClick = () => {
     setDontClickCount(prev => prev + 1);
-    
-    if (dontClickCount === 0) {
-      alert("I said don't click me! 😤");
-    } else if (dontClickCount === 1) {
-      alert("Seriously, stop clicking! 🙄");
-    } else if (dontClickCount === 2) {
-      alert("Fine... you win. Here's a cookie: 🍪");
-    } else {
-      alert("You're persistent. I respect that! 🎉");
-    }
+    addRageClick('hero-dont-click');
+    playSound('click');
+    const messages = [
+      "I said don't click me! 😤",
+      "Seriously, stop clicking! 🙄",
+      "Fine... you win. Here's a cookie: 🍪",
+      "You're persistent. I respect that! 🎉",
+    ];
+    const message = messages[Math.min(dontClickCount, messages.length - 1)];
+    toast({ title: '😅 Hey!', description: message, duration: 2000 });
   };
 
   const scrollToAbout = () => {
@@ -139,7 +142,7 @@ export function Hero() {
             )}
           </AnimatePresence>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               size="lg"
               onClick={scrollToAbout}

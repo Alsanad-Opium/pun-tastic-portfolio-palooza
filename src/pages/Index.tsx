@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { AchievementProvider, AchievementProgress } from '@/components/AchievementSystem';
 import { SoundProvider } from '@/components/SoundManager';
 import { CursorTrail } from '@/components/CursorTrail';
@@ -13,11 +14,13 @@ import { About } from '@/components/About';
 import { Projects } from '@/components/Projects';
 import { Skills } from '@/components/Skills';
 import { Contact } from '@/components/Contact';
+import { Resume } from '@/components/Resume';
 
 function PortfolioContent() {
   const [showIntro, setShowIntro] = useState(true);
   const [cursorTrailEnabled, setCursorTrailEnabled] = useState(true);
   const { showShortcuts, setShowShortcuts } = useKeyboardShortcuts();
+  const { theme } = useTheme();
 
   const handleIntroComplete = () => {
     setShowIntro(false);
@@ -35,6 +38,7 @@ function PortfolioContent() {
             <About />
             <Projects />
             <Skills />
+            <Resume />
             <Contact />
           </main>
           
@@ -45,6 +49,10 @@ function PortfolioContent() {
             isOpen={showShortcuts} 
             onClose={() => setShowShortcuts(false)} 
           />
+          {/* Subtle scanlines overlay in neon-hacker mode */}
+          {theme === 'neon-hacker' && (
+            <div className="fixed inset-0 pointer-events-none z-30 scanlines" />
+          )}
         </>
       )}
     </div>

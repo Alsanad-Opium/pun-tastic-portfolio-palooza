@@ -49,7 +49,7 @@ export function Navbar() {
           </motion.div>
 
           <div className="hidden md:flex items-center space-x-6">
-            {['about', 'projects', 'skills', 'contact'].map((section) => (
+            {['about', 'projects', 'skills', 'resume', 'contact'].map((section) => (
               <Button
                 key={section}
                 variant="ghost"
@@ -59,6 +59,7 @@ export function Navbar() {
                 {section === 'about' && theme === 'punny-mode' && '🤓 About'}
                 {section === 'projects' && theme === 'punny-mode' && '🚀 Pro-jects'}
                 {section === 'skills' && theme === 'punny-mode' && '⚡ Skill-ionaire'}
+                {section === 'resume' && theme === 'punny-mode' && '📄 Re-zume'}
                 {section === 'contact' && theme === 'punny-mode' && '📞 Con-tact'}
                 {theme !== 'punny-mode' && section}
               </Button>

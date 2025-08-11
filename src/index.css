@@ -84,6 +84,61 @@
     /* Neon Effects */
     --glow-primary: 0 0 10px hsl(var(--neon-green)), 0 0 20px hsl(var(--neon-green)), 0 0 30px hsl(var(--neon-green));
     --glow-secondary: 0 0 10px hsl(var(--neon-cyan)), 0 0 20px hsl(var(--neon-cyan));
+    position: relative;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    /* Ensure section gradients are dark in hacker mode */
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(200 50% 8%));
+  }
+
+  /* Neon Hacker focus and interactive states */
+  .neon-hacker ::selection {
+    background: hsl(var(--neon-cyan) / 0.2);
+    color: hsl(var(--neon-green));
+  }
+  .neon-hacker :focus-visible {
+    outline: 2px solid hsl(var(--neon-cyan));
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px hsl(var(--neon-cyan) / 0.25);
+  }
+  .neon-hacker a {
+    color: hsl(var(--neon-cyan));
+  }
+  .neon-hacker a:hover {
+    text-shadow: var(--glow-secondary);
+  }
+  .neon-hacker input,
+  .neon-hacker textarea,
+  .neon-hacker select {
+    background-color: hsl(200 50% 6%);
+    border-color: hsl(var(--neon-green));
+    color: hsl(var(--foreground));
+  }
+  .neon-hacker button:hover {
+    filter: drop-shadow(0 0 10px hsl(var(--neon-green) / 0.4));
+  }
+
+  /* Optional subtle grid overlay */
+  .neon-hacker::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 24px,
+        rgba(57,255,20,0.04) 24px,
+        rgba(57,255,20,0.04) 25px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 24px,
+        rgba(0,255,209,0.03) 24px,
+        rgba(0,255,209,0.03) 25px
+      );
+    z-index: 0;
   }
 
   /* Punny Mode - Comic & Colorful */
