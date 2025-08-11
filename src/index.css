@@ -274,4 +274,28 @@
   .animate-pulse-neon {
     animation: pulse-neon 2s ease-in-out infinite;
   }
+  
+  /* Party Mode Effects */
+  .party-mode {
+    animation: party-colors 2s infinite;
+  }
+  
+  @keyframes party-colors {
+    0% { filter: hue-rotate(0deg); }
+    25% { filter: hue-rotate(90deg); }
+    50% { filter: hue-rotate(180deg); }
+    75% { filter: hue-rotate(270deg); }
+    100% { filter: hue-rotate(360deg); }
+  }
+  
+  @keyframes fall {
+    to {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  
+  .pulse-on-hover:hover {
+    animation: pulse 1s infinite;
+  }
 }

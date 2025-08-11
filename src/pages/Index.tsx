@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import { AchievementProvider, AchievementProgress } from '@/components/AchievementSystem';
+import { SoundProvider } from '@/components/SoundManager';
+import { CursorTrail } from '@/components/CursorTrail';
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { FakeCrashIntro } from '@/components/FakeCrashIntro';
 import { FloatingJokes } from '@/components/FloatingJokes';
@@ -8,9 +11,12 @@ import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
 import { Projects } from '@/components/Projects';
+import { Skills } from '@/components/Skills';
+import { Contact } from '@/components/Contact';
 
 function PortfolioContent() {
   const [showIntro, setShowIntro] = useState(true);
+  const [cursorTrailEnabled, setCursorTrailEnabled] = useState(true);
   const { showShortcuts, setShowShortcuts } = useKeyboardShortcuts();
 
   const handleIntroComplete = () => {
@@ -28,24 +34,13 @@ function PortfolioContent() {
             <Hero />
             <About />
             <Projects />
-            
-            {/* Placeholder for other sections */}
-            <section id="skills" className="py-20 bg-gradient-subtle">
-              <div className="container mx-auto px-4 text-center">
-                <h2 className="text-4xl font-bold mb-6">⚡ Skills Coming Soon</h2>
-                <p className="text-xl text-muted-foreground">Interactive skill badges with dad jokes coming up!</p>
-              </div>
-            </section>
-            
-            <section id="contact" className="py-20">
-              <div className="container mx-auto px-4 text-center">
-                <h2 className="text-4xl font-bold mb-6">📞 Contact Coming Soon</h2>
-                <p className="text-xl text-muted-foreground">Fun contact form with rocket animations on the way!</p>
-              </div>
-            </section>
+            <Skills />
+            <Contact />
           </main>
           
+          <CursorTrail enabled={cursorTrailEnabled} />
           <FloatingJokes />
+          <AchievementProgress />
           <KeyboardShortcuts 
             isOpen={showShortcuts} 
             onClose={() => setShowShortcuts(false)} 
@@ -59,7 +54,11 @@ function PortfolioContent() {
 const Index = () => {
   return (
     <ThemeProvider>
-      <PortfolioContent />
+      <SoundProvider>
+        <AchievementProvider>
+          <PortfolioContent />
+        </AchievementProvider>
+      </SoundProvider>
     </ThemeProvider>
   );
 };

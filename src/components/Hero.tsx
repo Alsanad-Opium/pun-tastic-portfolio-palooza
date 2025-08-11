@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useAchievements } from '@/components/AchievementSystem';
+import { useSound } from '@/components/SoundManager';
+import { useToast } from '@/hooks/use-toast';
 import { ChevronDown, Coffee } from 'lucide-react';
 
 export function Hero() {
