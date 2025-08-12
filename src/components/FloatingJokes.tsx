@@ -1,19 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { X } from 'lucide-react';
+import { useAchievements } from '@/components/AchievementSystem';
+import { useToast } from '@/hooks/use-toast';
 
-const jokes = [
-  "I would tell you a UDP joke... but you might not get it. 📡",
-  "Why do programmers prefer dark mode? Because light attracts bugs! 🐛",
-  "How many programmers does it take to change a light bulb? None, that's a hardware problem! 💡",
-  "I'm not lazy, I'm just in energy-saving mode! ⚡",
-  "There are 10 types of people: those who understand binary and those who don't. 🤖",
-  "Why did the developer go broke? Because he used up all his cache! 💰",
-  "I put the 'fun' in function! 🎉",
-  "404: Joke not found... just kidding! 😄"
-];
+// Local analytics store (privacy-friendly, local only)
+const ANALYTICS_STORAGE_KEY = 'joke-click-analytics';
 
 interface FloatingJoke {
   id: number;
@@ -27,9 +21,37 @@ export function FloatingJokes() {
   const [floatingJokes, setFloatingJokes] = useState<FloatingJoke[]>([]);
   const [selectedJoke, setSelectedJoke] = useState<string | null>(null);
   const [clickCount, setClickCount] = useState(0);
+  const [jokes, setJokes] = useState<string[]>([]);
+  const { addJokeClick } = useAchievements();
+  const { toast } = useToast();
+
+  // Load jokes from JSON so they can be edited without code changes
+  useEffect(() => {
+    let isMounted = true;
+    fetch('/assets/jokes.json')
+      .then(res => res.ok ? res.json() : [])
+      .then((data: string[]) => {
+        if (isMounted && Array.isArray(data) && data.length > 0) setJokes(data);
+      })
+      .catch(() => {
+        // Fallback to built-in jokes if the file isn't found
+        setJokes([
+          "I would tell you a UDP joke... but you might not get it. 📡",
+          "Why do programmers prefer dark mode? Because light attracts bugs! 🐛",
+          "How many programmers does it take to change a light bulb? None, that's a hardware problem! 💡",
+          "I'm not lazy, I'm just in energy-saving mode! ⚡",
+          "There are 10 types of people: those who understand binary and those who don't. 🤖",
+          "Why did the developer go broke? Because he used up all his cache! 💰",
+          "I put the 'fun' in function! 🎉",
+          "404: Joke not found... just kidding! 😄",
+        ]);
+      });
+    return () => { isMounted = false; };
+  }, []);
 
   useEffect(() => {
     // Create initial floating jokes
+    if (jokes.length === 0) return;
     const initialJokes = Array.from({ length: 3 }, (_, i) => ({
       id: i,
       x: Math.random() * (window.innerWidth - 100),
@@ -39,12 +61,12 @@ export function FloatingJokes() {
     }));
 
     setFloatingJokes(initialJokes);
-  }, []);
+  }, [jokes]);
 
   useEffect(() => {
     // Spawn new joke every 10 seconds
     const interval = setInterval(() => {
-      if (floatingJokes.length < 5) {
+      if (floatingJokes.length < 5 && jokes.length > 0) {
         const newJoke: FloatingJoke = {
           id: Date.now(),
           x: Math.random() * (window.innerWidth - 100),
@@ -54,26 +76,32 @@ export function FloatingJokes() {
         };
         setFloatingJokes(prev => [...prev, newJoke]);
       }
-    }, 10000);
+    }, 2000);
 
     return () => clearInterval(interval);
-  }, [floatingJokes.length]);
+  }, [floatingJokes.length, jokes]);
 
   const handleJokeClick = (joke: FloatingJoke) => {
     setSelectedJoke(joke.joke);
     setClickCount(prev => prev + 1);
+    addJokeClick();
+    // Local analytics
+    try {
+      const raw = localStorage.getItem(ANALYTICS_STORAGE_KEY);
+      const stats: Record<string, number> = raw ? JSON.parse(raw) : {};
+      stats[joke.joke] = (stats[joke.joke] || 0) + 1;
+      localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(stats));
+    } catch {}
     
     // Remove the clicked joke and create a new one
     setFloatingJokes(prev => prev.filter(j => j.id !== joke.id));
     
-    // Achievement check
-    if (clickCount + 1 === 10) {
-      // Trigger achievement toast - you can implement this later
-      console.log("Achievement unlocked: Clicked 10 joke buttons!");
-    }
+    // Fun effect when joke clicked
+    toast({ title: '😂 Good one!', description: 'Click more for surprises...', duration: 1500 });
 
     // Respawn a new joke after a delay
     setTimeout(() => {
+      if (jokes.length === 0) return;
       const newJoke: FloatingJoke = {
         id: Date.now() + Math.random(),
         x: Math.random() * (window.innerWidth - 100),

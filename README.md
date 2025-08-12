@@ -1,73 +1,72 @@
-# Welcome to your Lovable project
+# Ridiculously Fun, Pun-Filled, Animated Portfolio (React + Vite)
 
-## Project info
+A single-page React + Vite portfolio that feels like an interactive comedy-adventure. It’s playful, full of animations, puns, and hidden surprises — hackers, meme-lovers, and recruiters will be delighted.
 
-**URL**: https://lovable.dev/projects/53f71877-44ac-4807-9f9b-86766bab0afe
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/53f71877-44ac-4807-9f9b-86766bab0afe) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Quick start
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open http://localhost:8080
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Tech stack
 
-**Use GitHub Codespaces**
+- React 18 + TypeScript + Vite
+- Tailwind CSS + shadcn-ui (Radix primitives)
+- Framer Motion animations
+- Optional sounds via Web Audio API (muted by default)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project structure
 
-## What technologies are used for this project?
+- `src/pages/Index.tsx`: App composition and providers
+- `src/components/*`: Sections and fun UI (Hero, About, Projects, Skills, Contact, FloatingJokes, KeyboardShortcuts, FakeCrashIntro, CursorTrail)
+- `src/components/ui/*`: shadcn-ui components
+- `src/contexts/ThemeContext.tsx`: Theme and fun modes (`light`, `neon-hacker`, `punny-mode`)
+- `src/components/AchievementSystem.tsx`: Achievements + localStorage persistence
+- `public/assets/jokes.json`: Editable jokes database for floating buttons
 
-This project is built with:
+## Features implemented
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- Fake crash intro with ESC/Skip and progress bar
+- Floating joke buttons with modal, respawn, and local analytics
+- Theme toggles: Light, Neon Hacker (scanlines, glow), Punny Mode (comic fonts)
+- Keyboard shortcuts: P x3 (Punny Mode), F (grayscale 3s), L (party 10s), ? (help)
+- Achievement toasts: first joke, 10 jokes, keyboard ninja, party animal, etc.
+- Rage-click toasts and tracking in Hero
+- Cursor trail with theme-specific particles
+- Accessibility: skip intro, keyboardable dialogs, motion kept subtle; respects user input focus
 
-## How can I deploy this project?
+## Editing copy, jokes, and Easter eggs
 
-Simply open [Lovable](https://lovable.dev/projects/53f71877-44ac-4807-9f9b-86766bab0afe) and click on Share -> Publish.
+- Change jokes in `public/assets/jokes.json` (array of strings). No code changes required.
+- Update section copy in component files under `src/components/*`.
+- Add new Easter eggs by placing small interactive elements in any section and using `useToast` for feedback.
 
-## Can I connect a custom domain to my Lovable project?
+## Keyboard shortcuts
 
-Yes, you can!
+- P x3: Toggle Punny Mode
+- F: Grayscale for 3s ("Paying respects…")
+- L: Disco party for ~10s
+- ?: Show help modal
+- ESC: Close dialogs / skip intro
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Performance notes
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- Heavy animations kept minimal; consider lazy-loading any Lottie/GSAP additions per section.
+- Sounds are muted by default; Web Audio API generates small tones only when enabled.
+
+## Where to edit
+
+- Colors and fonts: `src/index.css` and `tailwind.config.ts`
+- Theme logic: `src/contexts/ThemeContext.tsx`
+- Achievements: `src/components/AchievementSystem.tsx`
+- Keyboard: `src/hooks/useKeyboardShortcuts.ts`
+- Floating jokes: `src/components/FloatingJokes.tsx`
+
+## Roadmap ideas
+
+- Add Lottie JSON assets and trigger them contextually
+- GSAP scroll effects for section entrances
+- Mini-game in Contact (Flappy-like)
