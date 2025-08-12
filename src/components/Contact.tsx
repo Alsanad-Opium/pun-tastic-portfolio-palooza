@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/hooks/use-toast';
 import { Rocket, Send, Waves, GamepadIcon } from 'lucide-react';
+import emailjs from 'emailjs-com';
 
 export function Contact() {
   const { theme } = useTheme();
@@ -45,28 +46,36 @@ export function Contact() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!formData.name || !formData.email || !formData.message) {
-      toast({
-        title: "Oops! 🤔",
-        description: "Please fill in all fields before launching the rocket!",
-        duration: 3000,
-      });
-      return;
-    }
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
 
-    // Rocket launch animation
-    setIsRocketLaunched(true);
-    
+  if (!formData.name || !formData.email || !formData.message) {
+    toast({
+      title: "Oops! 🤔",
+      description: "Please fill in all fields before launching the rocket!",
+      duration: 3000,
+    });
+    return;
+  }
+
+  // 🚀 Launch rocket animation immediately
+  setIsRocketLaunched(true);
+
+emailjs.send(
+  import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  {  name: formData.name,
+      email: formData.email,
+      message: formData.message, },
+  import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+)
+  .then(() => {
     toast({
       title: "🚀 Message Launched!",
       description: "Your message is flying through cyberspace!",
       duration: 4000,
     });
 
-    // Reset form and rocket after animation
     setTimeout(() => {
       setIsRocketLaunched(false);
       setFormData({ name: '', email: '', message: '' });
@@ -76,7 +85,17 @@ export function Contact() {
         duration: 4000,
       });
     }, 3000);
-  };
+  })
+  .catch((err) => {
+    console.error("EmailJS Error:", err);
+    setIsRocketLaunched(false);
+    toast({
+      title: "Error 😢",
+      description: "Failed to send your message. Please try again later.",
+      duration: 4000,
+    });
+  });
+};
 
   const getPunnyTitle = () => {
     if (theme === 'punny-mode') return '📞 Con-tact Me';
