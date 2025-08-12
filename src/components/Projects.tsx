@@ -192,7 +192,10 @@ export function Projects() {
                             <Button
                               variant="secondary"
                               size="sm"
-                              onClick={(e) => e.stopPropagation()}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                window.open(project.githubUrl, '_blank');
+                              }}
                               className="flex items-center space-x-2"
                             >
                               <Github className="h-4 w-4" />

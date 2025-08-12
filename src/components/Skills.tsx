@@ -1,28 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/hooks/use-toast';
-import { Code, Database, Palette, Zap, Coffee, Bug } from 'lucide-react';
+import { 
+  Code, Database, Palette, Zap, Coffee, Bug, 
+  Lightbulb, Brain, Mic, Users 
+} from 'lucide-react';
 
 interface Skill {
   name: string;
   icon: React.ComponentType<any>;
   joke: string;
-  category: 'frontend' | 'backend' | 'design' | 'other';
+  category: 'frontend' | 'backend' | 'design' | 'other' | 'ai_ml' | 'data';
 }
 
 const skills: Skill[] = [
-  { name: 'React', icon: Code, joke: "React: Because who doesn't love components talking to each other!", category: 'frontend' },
-  { name: 'TypeScript', icon: Code, joke: "TypeScript: JavaScript with trust issues.", category: 'frontend' },
-  { name: 'Node.js', icon: Database, joke: "Node.js: Making JavaScript run everywhere... even where it shouldn't!", category: 'backend' },
-  { name: 'CSS', icon: Palette, joke: "CSS: 99 little bugs in the code... take one down, patch it around... 127 little bugs in the code!", category: 'design' },
-  { name: 'Git', icon: Code, joke: "Git: Because we all need a time machine for our mistakes.", category: 'other' },
-  { name: 'Coffee', icon: Coffee, joke: "Coffee: The most important programming language.", category: 'other' },
-  { name: 'Debugging', icon: Bug, joke: "Debugging: Being a detective in a crime movie where you're also the murderer.", category: 'other' },
-  { name: 'API Design', icon: Zap, joke: "APIs: Teaching computers to play telephone.", category: 'backend' },
-  { name: 'Responsive Design', icon: Palette, joke: "Responsive Design: Making websites work on everything from a smartwatch to a billboard.", category: 'design' },
+  { 
+    name: 'Frontend Development', 
+    icon: Code, 
+    joke: "React, JavaScript, HTML, CSS & Tailwind — making pixels behave since forever.", 
+    category: 'frontend' 
+  },
+  { 
+    name: 'Backend Development', 
+    icon: Database, 
+    joke: "Flask, Python, and C++ — keeping the server side spicy.", 
+    category: 'backend' 
+  },
+  { 
+    name: 'Databases', 
+    icon: Database, 
+    joke: "SQL, PostgreSQL, and MongoDB — my data always has a safe home.", 
+    category: 'backend' 
+  },
+  { 
+    name: 'Data Science & AI', 
+    icon: Zap, 
+    joke: "Pandas, NumPy, Scikit-learn, spaCy — teaching machines to think-ish.", 
+    category: 'ai_ml' 
+  },
+  { 
+    name: 'Version Control', 
+    icon: Code, 
+    joke: "Git — my personal time machine for code disasters.", 
+    category: 'other' 
+  },
+  { 
+    name: 'Creative & Team Skills', 
+    icon: Lightbulb, 
+    joke: "Project ideation, problem solving, pitching, collaboration — and coffee-powered optimism.", 
+    category: 'other' 
+  }
 ];
+
+
+
 
 export function Skills() {
   const { theme } = useTheme();

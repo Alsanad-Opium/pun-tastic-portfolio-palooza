@@ -13,18 +13,18 @@ export function About() {
 
   const skills = [
     { name: 'React', level: 95, joke: "React: Making components more dramatic than my dating life!" },
-    { name: 'TypeScript', level: 90, joke: "TypeScript: Because I like my errors at compile time, not in production!" },
-    { name: 'Node.js', level: 85, joke: "Node.js: Bringing JavaScript to the back-end since servers got lonely!" },
-    { name: 'Python', level: 80, joke: "Python: The language so simple, even my rubber duck understands it!" }
+    { name: 'Python', level: 90, joke: "Python: The language so simple, even my rubber duck understands it!" },
+    { name: 'TypeScript', level: 85, joke: "TypeScript: Because I like my errors at compile time, not in production!" },
+    { name: 'Node.js', level: 80, joke: "Node.js: Bringing JavaScript to the back-end since servers got lonely!" },
   ];
 
   const timeline = [
-    { year: '2020', event: 'Started coding', emoji: '🚀', description: 'First Hello World (it took 3 hours)' },
-    { year: '2021', event: 'First job', emoji: '💼', description: 'Survived the interview somehow' },
-    { year: '2022', event: 'Full Stack', emoji: '🥞', description: 'Mastered the art of breaking both ends' },
-    { year: '2023', event: 'Senior Dev', emoji: '🧙‍♂️', description: 'Now I debug other people\'s mistakes' },
-    { year: '2024', event: 'Comedy Coder', emoji: '🎭', description: 'Making development fun again' }
+    { year: '2023', event: 'SSC Graduation', emoji: '🎓', description: 'Completed SSC with 94% marks' },
+    { year: '2023-2026', event: 'Diploma in AIML', emoji: '🤖', description: 'Pursuing 3rd year in Artificial Intelligence and Machine Learning' },
+    { year: '2024 Summer', event: 'Internship @ ITnetworkz Infotech', emoji: '💼', description: 'Worked on practical projects and industry-focused learning' },
+    { year: '2023-2025', event: 'Hackathon Participation', emoji: '⚡', description: 'Participated in multiple hackathons, enhancing problem-solving and teamwork skills' }
   ];
+  
 
   const cycleHat = () => {
     setHatIndex((prev) => (prev + 1) % hats.length);
@@ -84,13 +84,13 @@ export function About() {
                   theme === 'punny-mode' ? 'font-comic' : ''
                 }`}>
                   {theme === 'punny-mode' ? 'The Pun-der Developer' : 
-                   theme === 'neon-hacker' ? '> dev.getName()' : 
-                   'John Developer'}
+                   theme === 'neon-hacker' ? '> dev.getName("Alsanad Sheikh")' : 
+                   'Alsanad Sheikh The Developer'}
                 </h3>
                 <p className="text-muted-foreground">
                   {theme === 'punny-mode' ? 'Master of Code-dy' : 
                    theme === 'neon-hacker' ? 'System.exe Administrator' : 
-                   'Full Stack Developer & Code Enthusiast'}
+                   'Full Stack AI/ML Developer & Code Enthusiast'}
                 </p>
               </div>
             </div>
@@ -110,7 +110,7 @@ export function About() {
               </div>
               <div className="flex items-center space-x-2">
                 <Zap className="h-5 w-5 text-primary" />
-                <span>{theme === 'punny-mode' ? 'Lightning-Fast Puns' : 'Performance Optimization'}</span>
+                <span>{theme === 'punny-mode' ? 'Lightning-Fast Execution' : 'Performance Optimization'}</span>
               </div>
             </div>
 
