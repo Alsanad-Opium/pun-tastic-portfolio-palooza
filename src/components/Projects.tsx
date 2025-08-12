@@ -10,54 +10,81 @@ export function Projects() {
   const { theme } = useTheme();
   const [flippedCard, setFlippedCard] = useState<number | null>(null);
 
-  const projects = [
+   const projects = [
     {
       id: 1,
-      title: theme === 'punny-mode' ? 'Task-tic Organizer' : theme === 'neon-hacker' ? 'TASK.EXE' : 'Task Management App',
-      description: theme === 'punny-mode' 
-        ? "A task manager so good, it'll make your to-do list say 'ta-da!' instead!" 
-        : "Full-featured task management application with real-time collaboration",
-      technologies: ['React', 'Node.js', 'MongoDB'],
-      demoUrl: '#',
-      githubUrl: '#',
-      emoji: '📋',
-      joke: "Why did the task manager break up with the calendar? It had too many dates!"
+      title: theme === 'punny-mode' ? 'Wild About Tickets' : theme === 'neon-hacker' ? 'TICKET.SYS' : 'TECHNEX-25 Ticketing System',
+      description: theme === 'punny-mode'
+        ? "Book your next wildlife adventure without the monkey business—our chatbot handles it all!"
+        : "Full-stack Django + AI chatbot platform for booking wildlife sanctuary and monument tickets.",
+      technologies: ['Django', 'MySQL', 'Langflow', 'JavaScript', 'HTML/CSS'],
+      demoUrl: '#', // replace with demo link if available
+      githubUrl: 'https://github.com/Alsanad-Opium/Ticketing_system',
+      emoji: '🎟️',
+      joke: "Why did the chatbot book a safari? It wanted to debug in the wild!"
     },
     {
       id: 2,
-      title: theme === 'punny-mode' ? 'E-com-media Platform' : theme === 'neon-hacker' ? 'SHOP.MATRIX' : 'E-Commerce Platform',
-      description: theme === 'punny-mode' 
-        ? "Shopping made so easy, even your wallet will thank you (before crying)!" 
-        : "Modern e-commerce solution with advanced analytics and inventory management",
-      technologies: ['Next.js', 'Stripe', 'PostgreSQL'],
+      title: theme === 'punny-mode' ? 'Pipe Dream Machine' : theme === 'neon-hacker' ? 'PIPELINE.EXE' : 'Drag-DROP DAG Pipeline Builder',
+      description: theme === 'punny-mode'
+        ? "Design data flows so smooth, they should come with a jazz soundtrack."
+        : "Interactive pipeline builder using ReactFlow + FastAPI with DAG validation.",
+      technologies: ['ReactFlow', 'FastAPI', 'NetworkX', 'JavaScript', 'Python'],
       demoUrl: '#',
-      githubUrl: '#',
-      emoji: '🛒',
-      joke: "How do you comfort a JavaScript bug? You console it!"
+      githubUrl: 'https://github.com/Alsanad-Opium/Drag-DROP_DAG_pipeline',
+      emoji: '🔗',
+      joke: "I told my pipeline a joke... now it's streaming with laughter!"
     },
     {
       id: 3,
-      title: theme === 'punny-mode' ? 'Weather-ing Heights' : theme === 'neon-hacker' ? 'CLIMATE.SYS' : 'Weather Dashboard',
-      description: theme === 'punny-mode' 
-        ? "Predicting weather better than your grandmother's knee!" 
-        : "Beautiful weather dashboard with location-based forecasts and data visualization",
-      technologies: ['Vue.js', 'Chart.js', 'Weather API'],
+      title: theme === 'punny-mode' ? 'Chef\'s Kiss AI' : theme === 'neon-hacker' ? 'CHEF.GEMINI' : 'Chef-Gemini',
+      description: theme === 'punny-mode'
+        ? "Give me your fridge contents, and I'll cook up ideas hotter than your stove!"
+        : "AI-powered recipe generator using Google Gemini API for text & image generation.",
+      technologies: ['Vite', 'JavaScript', 'Google Gemini API', 'HTML/CSS'],
       demoUrl: '#',
-      githubUrl: '#',
-      emoji: '🌤️',
-      joke: "Why don't developers trust the weather API? Because it's always cloudy with a chance of bugs!"
+      githubUrl: 'https://github.com/Alsanad-Opium/chef-gemini',
+      emoji: '🍳',
+      joke: "Why don't AI chefs ever panic? They always keep their cool under pressure."
     },
     {
       id: 4,
-      title: 'The Button That Does Nothing',
-      description: "A masterpiece of engineering that does absolutely nothing when clicked. Won the 2024 Award for 'Most Honest User Interface'.",
-      technologies: ['HTML', 'CSS', 'Disappointment'],
-      demoUrl: '#nothing',
-      githubUrl: '#nothing',
-      emoji: '🔘',
-      joke: "This button is like my motivation on Monday morning - non-functional but still there!"
+      title: theme === 'punny-mode' ? 'Sign Here, Please!' : theme === 'neon-hacker' ? 'SIGN.APP' : 'QuickSign App',
+      description: theme === 'punny-mode'
+        ? "Draw your autograph faster than a celebrity dodging paparazzi."
+        : "Digital signature app with stroke customization and save/download features.",
+      technologies: ['JavaScript', 'HTML/CSS', 'Canvas API'],
+      demoUrl: '#',
+      githubUrl: 'https://github.com/Alsanad-Opium/Quicksign_app',
+      emoji: '✍️',
+      joke: "Why did the pen refuse to work? It didn't sign up for this."
+    },
+    {
+      id: 5,
+      title: theme === 'punny-mode' ? 'Count On Me' : theme === 'neon-hacker' ? 'CALC.EXE' : 'Simple Calculator Website',
+      description: theme === 'punny-mode'
+        ? "Crunching numbers like they're potato chips-can't stop, won't stop."
+        : "Flask-based calculator with responsive UI and backend validation.",
+      technologies: ['Flask', 'JavaScript', 'HTML/CSS'],
+      demoUrl: '#',
+      githubUrl: 'https://github.com/Alsanad-Opium/Simple-Calculator-website',
+      emoji: '🧮',
+      joke: "Why did the calculator break up? It couldn't count on its partner."
+    },
+    {
+      id: 6,
+      title: theme === 'punny-mode' ? 'Type Like The Wind' : theme === 'neon-hacker' ? 'TYPE.SPD' : 'Typing Speed App',
+      description: theme === 'punny-mode'
+        ? "Test your typing skills before your keyboard files a complaint."
+        : "Frontend typing speed test with category-based filtering and dynamic scoring.",
+      technologies: ['JavaScript', 'HTML/CSS'],
+      demoUrl: '#',
+      githubUrl: 'https://github.com/Alsanad-Opium/TypingSpeed_app',
+      emoji: '⌨️',
+      joke: "My typing speed is like a race car... until autocorrect crashes it."
     }
   ];
+  
 
   const handleCardFlip = (id: number) => {
     setFlippedCard(flippedCard === id ? null : id);
@@ -104,101 +131,125 @@ export function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              className="relative h-[400px] perspective-1000"
+              className="relative h-[400px]"
             >
-              <motion.div
-                className={`w-full h-full relative preserve-3d cursor-pointer ${
-                  flippedCard === project.id ? 'rotate-y-180' : ''
-                }`}
-                onClick={() => handleCardFlip(project.id)}
-                style={{
-                  transformStyle: 'preserve-3d',
-                  transition: 'transform 0.6s'
-                }}
-              >
-                {/* Front of card */}
-                <Card className={`absolute inset-0 backface-hidden p-6 flex flex-col justify-between ${
-                  theme === 'neon-hacker' ? 'neon-border bg-card/90' : ''
-                } hover:shadow-2xl transition-shadow duration-300`}>
-                  <div>
-                    <div className="text-6xl mb-4 text-center">{project.emoji}</div>
-                    <h3 className={`text-xl font-bold mb-3 ${
-                      theme === 'neon-hacker' ? 'neon-glow-secondary' : 
-                      theme === 'punny-mode' ? 'font-comic' : ''
-                    }`}>
-                      {project.title}
-                    </h3>
-                    <p className={`text-muted-foreground mb-4 ${
-                      theme === 'punny-mode' ? 'font-baloo' : ''
-                    }`}>
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="secondary" className={`${
-                          theme === 'punny-mode' ? 'wobble' : ''
+              <AnimatePresence mode="wait">
+                {flippedCard === project.id ? (
+                  // Back of card (joke)
+                  <motion.div
+                    key="back"
+                    initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                    animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                    exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="absolute inset-0"
+                  >
+                    <Card 
+                      className={`h-full p-6 flex flex-col justify-between cursor-pointer ${
+                        theme === 'neon-hacker' ? 'neon-border bg-card/90' : ''
+                      }`}
+                      onClick={() => handleCardFlip(project.id)}
+                      style={{
+                        background: theme === 'punny-mode' 
+                          ? 'linear-gradient(135deg, hsl(24 95% 56%), hsl(174 64% 47%))'
+                          : theme === 'neon-hacker'
+                          ? 'linear-gradient(135deg, hsl(120 100% 55%), hsl(180 100% 50%))'
+                          : 'linear-gradient(135deg, hsl(5 91% 69%), hsl(48 100% 60%))',
+                        color: 'white'
+                      }}
+                    >
+                      <div className="text-center space-y-4">
+                        <div className="text-4xl">😂</div>
+                        <p className="text-lg font-medium leading-relaxed">
+                          {project.joke}
+                        </p>
+                      </div>
+                      
+                      <div className="flex gap-3 justify-center">
+                        {project.title === 'The Button That Does Nothing' ? (
+                          <Button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleNothingButton();
+                            }}
+                            variant="secondary"
+                            className="flex items-center space-x-2"
+                          >
+                            <Zap className="h-4 w-4" />
+                            <span>Do Nothing</span>
+                          </Button>
+                        ) : (
+                          <>
+                            <Button
+                              variant="secondary"
+                              size="sm"
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex items-center space-x-2"
+                            >
+                              <ExternalLink className="h-4 w-4" />
+                              <span>Demo</span>
+                            </Button>
+                            <Button
+                              variant="secondary"
+                              size="sm"
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex items-center space-x-2"
+                            >
+                              <Github className="h-4 w-4" />
+                              <span>Code</span>
+                            </Button>
+                          </>
+                        )}
+                      </div>
+                    </Card>
+                  </motion.div>
+                ) : (
+                  // Front of card (project details)
+                  <motion.div
+                    key="front"
+                    initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                    animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                    exit={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="absolute inset-0"
+                  >
+                    <Card 
+                      className={`h-full p-6 flex flex-col justify-between cursor-pointer hover:shadow-2xl transition-shadow duration-300 ${
+                        theme === 'neon-hacker' ? 'neon-border bg-card/90' : ''
+                      }`}
+                      onClick={() => handleCardFlip(project.id)}
+                    >
+                      <div>
+                        <div className="text-6xl mb-4 text-center">{project.emoji}</div>
+                        <h3 className={`text-xl font-bold mb-3 ${
+                          theme === 'neon-hacker' ? 'neon-glow-secondary' : 
+                          theme === 'punny-mode' ? 'font-comic' : ''
                         }`}>
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="text-center text-sm text-muted-foreground">
-                    💡 Click to flip & see the joke!
-                  </div>
-                </Card>
-
-                {/* Back of card */}
-                <Card className={`absolute inset-0 backface-hidden rotate-y-180 p-6 flex flex-col justify-between ${
-                  theme === 'neon-hacker' ? 'neon-border bg-card/90' : ''
-                } bg-gradient-fun text-white`}
-                style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}>
-                  <div className="text-center space-y-4">
-                    <div className="text-4xl">😂</div>
-                    <p className="text-lg font-medium leading-relaxed">
-                      {project.joke}
-                    </p>
-                  </div>
-                  
-                  <div className="flex gap-3 justify-center">
-                    {project.title === 'The Button That Does Nothing' ? (
-                      <Button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleNothingButton();
-                        }}
-                        variant="secondary"
-                        className="flex items-center space-x-2"
-                      >
-                        <Zap className="h-4 w-4" />
-                        <span>Do Nothing</span>
-                      </Button>
-                    ) : (
-                      <>
-                        <Button
-                          variant="secondary"
-                          size="sm"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center space-x-2"
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                          <span>Demo</span>
-                        </Button>
-                        <Button
-                          variant="secondary"
-                          size="sm"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center space-x-2"
-                        >
-                          <Github className="h-4 w-4" />
-                          <span>Code</span>
-                        </Button>
-                      </>
-                    )}
-                  </div>
-                </Card>
-              </motion.div>
+                          {project.title}
+                        </h3>
+                        <p className={`text-muted-foreground mb-4 ${
+                          theme === 'punny-mode' ? 'font-baloo' : ''
+                        }`}>
+                          {project.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.technologies.map((tech) => (
+                            <Badge key={tech} variant="secondary" className={`${
+                              theme === 'punny-mode' ? 'wobble' : ''
+                            }`}>
+                              {tech}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="text-center text-sm text-muted-foreground">
+                        💡 Click to flip & see the joke!
+                      </div>
+                    </Card>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </div>

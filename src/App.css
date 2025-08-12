@@ -40,3 +40,27 @@
 .read-the-docs {
   color: #888;
 }
+/* Enable perspective for 3D flip */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Backface visibility */
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Preserve 3D for parent container */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Rotate Y utility */
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Duration utilities for transitions */
+.duration-600 {
+  transition-duration: 600ms;
+}
