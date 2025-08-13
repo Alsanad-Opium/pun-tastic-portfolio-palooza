@@ -17,9 +17,9 @@ export function Hero() {
   const { playSound } = useSound();
 
   const texts = {
-    light: "Hi! I'm a developer who debugs with coffee ☕",
+    light: "Hi! I'm Mohammad Alsanad, a developer who debugs with coffee ☕",
     'neon-hacker': "> console.log('Hacking reality with code...')",
-    'punny-mode': "I'm not just coding, I'm pun-coding! 🎭"
+    'punny-mode': "I'm not just coding, I'm Hakla-coding! 🎭"
   };
 
   const currentText = texts[theme];

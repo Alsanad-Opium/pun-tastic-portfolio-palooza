@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useToast } from '@/hooks/use-toast';
-import { Rocket, Send, Waves, GamepadIcon } from 'lucide-react';
+import { Rocket, Send, Waves, GamepadIcon, Github, Linkedin, Mail } from 'lucide-react';
 import emailjs from 'emailjs-com';
 
 export function Contact() {
@@ -20,10 +20,27 @@ export function Contact() {
     message: ''
   });
 
+  const socials = [
+    {
+      name: 'GitHub',
+      url: 'https://github.com/Alsanad-Opium',
+      icon: <Github className="h-6 w-6" />,
+    },
+    {
+      name: 'LinkedIn',
+      url: 'https://www.linkedin.com/in/mohammad-alsanad-sheikh-a12818302',
+      icon: <Linkedin className="h-6 w-6" />,
+    },
+    // {
+    //   name: 'Email',
+    //   url: 'mailto:alsanad112006@gmail.com',
+    //   icon: <Mail className="h-6 w-6" />,
+    // },
+  ];
+
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     
-    // Easter eggs for specific inputs
     if (field === 'message' && value.toLowerCase().includes('hello world')) {
       if (!isWaving) {
         setIsWaving(true);
@@ -46,56 +63,53 @@ export function Contact() {
     }
   };
 
-const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-  if (!formData.name || !formData.email || !formData.message) {
-    toast({
-      title: "Oops! 🤔",
-      description: "Please fill in all fields before launching the rocket!",
-      duration: 3000,
-    });
-    return;
-  }
-
-  // 🚀 Launch rocket animation immediately
-  setIsRocketLaunched(true);
-
-emailjs.send(
-  import.meta.env.VITE_EMAILJS_SERVICE_ID,
-  import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-  {  name: formData.name,
-      email: formData.email,
-      message: formData.message, },
-  import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-)
-  .then(() => {
-    toast({
-      title: "🚀 Message Launched!",
-      description: "Your message is flying through cyberspace!",
-      duration: 4000,
-    });
-
-    setTimeout(() => {
-      setIsRocketLaunched(false);
-      setFormData({ name: '', email: '', message: '' });
+    if (!formData.name || !formData.email || !formData.message) {
       toast({
-        title: "📬 Message Delivered!",
-        description: "Thanks for reaching out! I'll get back to you soon.",
-        duration: 4000,
+        title: "Oops! 🤔",
+        description: "Please fill in all fields before launching the rocket!",
+        duration: 3000,
       });
-    }, 3000);
-  })
-  .catch((err) => {
-    console.error("EmailJS Error:", err);
-    setIsRocketLaunched(false);
-    toast({
-      title: "Error 😢",
-      description: "Failed to send your message. Please try again later.",
-      duration: 4000,
-    });
-  });
-};
+      return;
+    }
+
+    setIsRocketLaunched(true);
+
+    emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      { name: formData.name, email: formData.email, message: formData.message },
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
+      .then(() => {
+        toast({
+          title: "🚀 Message Launched!",
+          description: "Your message is flying through cyberspace!",
+          duration: 4000,
+        });
+
+        setTimeout(() => {
+          setIsRocketLaunched(false);
+          setFormData({ name: '', email: '', message: '' });
+          toast({
+            title: "📬 Message Delivered!",
+            description: "Thanks for reaching out! I'll get back to you soon.",
+            duration: 4000,
+          });
+        }, 3000);
+      })
+      .catch((err) => {
+        console.error("EmailJS Error:", err);
+        setIsRocketLaunched(false);
+        toast({
+          title: "Error 😢",
+          description: "Failed to send your message. Please try again later.",
+          duration: 4000,
+        });
+      });
+  };
 
   const getPunnyTitle = () => {
     if (theme === 'punny-mode') return '📞 Con-tact Me';
@@ -135,7 +149,6 @@ emailjs.send(
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
-      {/* Mini Game Modal */}
       <AnimatePresence>
         {showMiniGame && (
           <motion.div
@@ -156,9 +169,6 @@ emailjs.send(
               <h3 className="text-2xl font-bold mb-4">Mini-Game Placeholder</h3>
               <p className="text-muted-foreground mb-6">
                 A fun Flappy Bird-like game would go here! 🐦
-              </p>
-              <p className="text-sm text-muted-foreground mb-4">
-                Press SPACE to flap... if this was real! 😄
               </p>
               <Button onClick={() => setShowMiniGame(false)}>
                 Back to Reality
@@ -262,27 +272,6 @@ emailjs.send(
                   )}
                 </motion.div>
               </Button>
-
-              {/* Rocket trail effect */}
-              {isRocketLaunched && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="absolute inset-0 pointer-events-none"
-                >
-                  {[...Array(10)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ y: 0, opacity: 1 }}
-                      animate={{ y: -200, opacity: 0 }}
-                      transition={{ duration: 1, delay: i * 0.1 }}
-                      className="absolute left-1/2 top-1/2 text-orange-500"
-                    >
-                      🔥
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
             </motion.div>
           </motion.form>
 
@@ -297,93 +286,28 @@ emailjs.send(
               Or find me on these platforms:
             </p>
             <div className="flex justify-center space-x-6">
-              {['GitHub', 'LinkedIn', 'Twitter'].map((platform) => (
+              {socials.map(({ name, url, icon }) => (
                 <motion.a
-                  key={platform}
-                  href="#"
+                  key={name}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, rotate: theme === 'punny-mode' ? 10 : 0 }}
                   whileTap={{ scale: 0.95 }}
                   className={`
+                    flex items-center space-x-2
                     text-muted-foreground hover:text-primary transition-colors
                     ${theme === 'neon-hacker' ? 'hover:neon-glow' : ''}
                   `}
                 >
-                  {platform}
+                  {icon}
+                  <span>{name}</span>
                 </motion.a>
               ))}
             </div>
           </motion.div>
         </div>
-
-        {/* "Don't click me" trolling button */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="absolute bottom-8 left-8"
-        >
-          <TrollingButton />
-        </motion.div>
       </div>
     </section>
-  );
-}
-
-// Trolling Button Component
-function TrollingButton() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isClicked, setIsClicked] = useState(false);
-  const [clickCount, setClickCount] = useState(0);
-  const { toast } = useToast();
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  const runAway = () => {
-    if (clickCount < 3) {
-      const newX = Math.random() * 200 - 100;
-      const newY = Math.random() * 200 - 100;
-      setPosition({ x: newX, y: newY });
-      setClickCount(prev => prev + 1);
-    }
-  };
-
-  const handleClick = () => {
-    if (clickCount >= 3) {
-      setIsClicked(true);
-      toast({
-        title: "😤 Fine, you got me!",
-        description: "Achievement unlocked: Button Whisperer!",
-        duration: 4000,
-      });
-    }
-  };
-
-  if (isClicked) {
-    return (
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        className="text-center"
-      >
-        <div className="text-4xl mb-2">🎉</div>
-        <p className="text-sm text-muted-foreground">You caught me!</p>
-      </motion.div>
-    );
-  }
-
-  return (
-    <motion.button
-      ref={buttonRef}
-      className="bg-destructive text-destructive-foreground px-4 py-2 rounded-md text-sm hover:bg-destructive/90 transition-colors"
-      style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      onMouseEnter={runAway}
-      onClick={handleClick}
-    >
-      {clickCount === 0 && "Don't click me!"}
-      {clickCount === 1 && "I said don't!"}
-      {clickCount === 2 && "Stop it!"}
-      {clickCount >= 3 && "OK fine..."}
-    </motion.button>
   );
 }

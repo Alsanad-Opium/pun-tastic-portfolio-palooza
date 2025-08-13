@@ -14,6 +14,7 @@ export function About() {
   const skills = [
     { name: 'React', level: 95, joke: "React: Making components more dramatic than my dating life!" },
     { name: 'Python', level: 90, joke: "Python: The language so simple, even my rubber duck understands it!" },
+    { name: 'AI/ML', level: 80, joke: "AI/ML: Making machines smarter than me!" },
     { name: 'TypeScript', level: 85, joke: "TypeScript: Because I like my errors at compile time, not in production!" },
     { name: 'Node.js', level: 80, joke: "Node.js: Bringing JavaScript to the back-end since servers got lonely!" },
   ];
@@ -174,7 +175,7 @@ export function About() {
                  'Core Skills'}
               </h4>
               <div className="space-y-3">
-                {skills.slice(0, 4).map((skill, index) => (
+                {skills.slice(0, 5).map((skill, index) => (
                   <motion.div
                     key={skill.name}
                     initial={{ opacity: 0, width: 0 }}
