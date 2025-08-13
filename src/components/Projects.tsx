@@ -274,6 +274,7 @@ export function Projects() {
           <Button 
             variant="outline" 
             size="lg"
+            onClick={() => window.open('https://github.com/Alsanad-Opium', '_blank')}
             className={`hover:scale-105 transition-transform ${
               theme === 'punny-mode' ? 'wobble' : 
               theme === 'neon-hacker' ? 'neon-border' : ''
