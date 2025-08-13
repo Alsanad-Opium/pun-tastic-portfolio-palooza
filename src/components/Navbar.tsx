@@ -62,7 +62,7 @@ export function Navbar({ isEffectActive = false }: NavbarProps) {
             className="text-xl font-bold"
           >
             <span className={theme === 'neon-hacker' ? 'neon-glow' : ''}>
-              {theme === 'punny-mode' ? '🎭 PunMaster' : theme === 'neon-hacker' ? '< /DEV >' : '💻 DevComedy'}
+              {theme === 'punny-mode' ? '🎭 PunMaster' : theme === 'neon-hacker' ? '< /DEV >' : '💻 DeVeLePeR-Pro-Max'}
             </span>
           </motion.div>
 
