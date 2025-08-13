@@ -16,7 +16,7 @@ interface SoundProviderProps {
 }
 
 export function SoundProvider({ children }: SoundProviderProps) {
-  const [isMuted, setIsMuted] = useState(true); // Default to muted for accessibility
+  const [isMuted, setIsMuted] = useState(false); // Default to muted for accessibility
   
   // Simple sound synthesis using Web Audio API
   const audioContextRef = useRef<AudioContext | null>(null);

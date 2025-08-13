@@ -12,6 +12,8 @@ export function Hero() {
   const [typedText, setTypedText] = useState('');
   const [showEmojis, setShowEmojis] = useState(false);
   const [dontClickCount, setDontClickCount] = useState(0);
+  const [hasTriggeredEffect, setHasTriggeredEffect] = useState(false);
+  const [isEffectActive, setIsEffectActive] = useState(false);
   const { addRageClick } = useAchievements();
   const { toast } = useToast();
   const { playSound } = useSound();
@@ -39,6 +41,22 @@ export function Hero() {
 
     return () => clearInterval(timer);
   }, [currentText]);
+
+  const triggerDramaticEffect = () => {
+    if (hasTriggeredEffect) return;
+    
+    setHasTriggeredEffect(true);
+    setIsEffectActive(true);
+    playSound('error'); // Play error sound for dramatic effect
+    
+    // Dispatch custom event to notify Index page about navbar animation
+    window.dispatchEvent(new CustomEvent('dramatic-effect-triggered'));
+    
+    // Sequence: navbar drop -> black screen -> light bulb flicker -> return to normal
+    setTimeout(() => {
+      setIsEffectActive(false);
+    }, 5000); // Total effect duration: 3 seconds
+  };
 
   const handleDontClick = () => {
     setDontClickCount(prev => prev + 1);
@@ -99,7 +117,7 @@ export function Hero() {
           }`}>
             {theme === 'punny-mode' ? '🎪 Welcome to the Code Circus!' : 
              theme === 'neon-hacker' ? '< REALITY.EXE />' : 
-             'Full Stack Developer'}
+             'AI/ML & Full Stack Developer'}
           </h1>
 
           <div className="min-h-[80px] flex items-center justify-center">
@@ -132,8 +150,9 @@ export function Hero() {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: index * 0.1 }}
-                    className="text-3xl float"
+                    className="text-3xl float cursor-pointer"
                     style={{ animationDelay: `${index * 0.5}s` }}
+                    onClick={triggerDramaticEffect}
                   >
                     {emoji}
                   </motion.span>
@@ -188,6 +207,36 @@ export function Hero() {
           <ChevronDown className="h-8 w-8 text-muted-foreground" />
         </motion.div>
       </div>
+      
+      {/* Dramatic Effect Overlay */}
+      <AnimatePresence>
+        {isEffectActive && (
+          <>
+            {/* Black Screen Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5 }} // Moderate speed: 1.5s to go black
+              className="fixed inset-0 bg-black z-50"
+            />
+            
+            {/* Light Bulb Flicker Effect */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0, 1, 0, 1, 0], // Light bulb flicker pattern
+                scale: [1, 1.2, 1, 1.1, 1, 1.3, 1]
+              }}
+              transition={{ 
+                duration: 2.5,
+                times: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 1] // Flicker timing
+              }}
+              className="fixed inset-0 bg-white z-50 pointer-events-none"
+            />
+          </>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

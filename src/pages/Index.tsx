@@ -13,12 +13,13 @@ import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
 import { Projects } from '@/components/Projects';
 import { Skills } from '@/components/Skills';
-import { Contact } from '@/components/Contact';
 import { Resume } from '@/components/Resume';
+import { Contact } from '@/components/Contact';
 
 function PortfolioContent() {
   const [showIntro, setShowIntro] = useState(true);
   const [cursorTrailEnabled, setCursorTrailEnabled] = useState(true);
+  const [isEffectActive, setIsEffectActive] = useState(false);
   const { showShortcuts, setShowShortcuts } = useKeyboardShortcuts();
   const { theme } = useTheme();
 
@@ -26,13 +27,28 @@ function PortfolioContent() {
     setShowIntro(false);
   };
 
+  // Listen for dramatic effect from Hero component
+  useEffect(() => {
+    const handleEffectTrigger = () => {
+      setIsEffectActive(true);
+      setTimeout(() => setIsEffectActive(false), 3000);
+    };
+
+    // Custom event listener for the dramatic effect
+    window.addEventListener('dramatic-effect-triggered', handleEffectTrigger);
+    
+    return () => {
+      window.removeEventListener('dramatic-effect-triggered', handleEffectTrigger);
+    };
+  }, []);
+
   return (
     <div className="relative">
       {showIntro && <FakeCrashIntro onComplete={handleIntroComplete} />}
       
       {!showIntro && (
         <>
-          <Navbar />
+          <Navbar isEffectActive={isEffectActive} />
           <main className="relative">
             <Hero />
             <About />

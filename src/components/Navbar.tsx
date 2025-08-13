@@ -1,10 +1,14 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Monitor, Zap, Palette } from 'lucide-react';
 
-export function Navbar() {
+interface NavbarProps {
+  isEffectActive?: boolean;
+}
+
+export function Navbar({ isEffectActive = false }: NavbarProps) {
   const { theme, setTheme } = useTheme();
 
   const scrollToSection = (sectionId: string) => {
@@ -33,8 +37,22 @@ export function Navbar() {
   return (
     <motion.nav
       initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      animate={{ 
+        y: isEffectActive ? 20 : 0, // Drop down dramatically when effect is active
+        rotate: isEffectActive ? [0, 5, -5, 0] : 0, // Add some rotation for dramatic effect
+        scale: isEffectActive ? [1, 1.05, 0.95, 1] : 1 // Scale effect
+      }}
+      transition={{ 
+        type: "spring", 
+        stiffness: 100, 
+        damping: 20,
+        // Dramatic animation when effect is active
+        ...(isEffectActive && {
+          y: { duration: 0.8, ease: "easeOut" },
+          rotate: { duration: 1.2, ease: "easeInOut" },
+          scale: { duration: 1.5, ease: "easeInOut" }
+        })
+      }}
       className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-40"
     >
       <div className="container mx-auto px-4 py-4">

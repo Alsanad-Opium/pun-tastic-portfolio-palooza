@@ -91,7 +91,9 @@ export function FloatingJokes() {
       const stats: Record<string, number> = raw ? JSON.parse(raw) : {};
       stats[joke.joke] = (stats[joke.joke] || 0) + 1;
       localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(stats));
-    } catch {}
+    } catch {
+      // Analytics failed, continue without breaking the app
+    }
     
     // Remove the clicked joke and create a new one
     setFloatingJokes(prev => prev.filter(j => j.id !== joke.id));
